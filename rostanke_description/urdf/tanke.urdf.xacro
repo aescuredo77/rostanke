@@ -142,7 +142,7 @@
     uper="0.0"/>
 
     <xacro:gpu_laser prefix="rplidar" 
-    parent_link="base_link"
+    parent_link="plat02_link"
     sensor_prop="${sensor_prop}"
     material= "Grey"
     material2= "Red"/> 
