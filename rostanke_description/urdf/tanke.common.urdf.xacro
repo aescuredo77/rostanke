@@ -220,7 +220,7 @@
         <child link="${prefix}_link"/>
         <axis xyz="1 0 0"/>
         <origin xyz="${plat_props['x_joint']} ${plat_props['y_joint']} ${plat_props['z_joint']}" rpy="0 0 0"/>
-        <limit lower="${lower}" upper="${uper}" effort="1.0" velocity="0.06"/>
+        <limit lower="${lower}" upper="${uper}" effort="3.0" velocity="0.6"/>
     </joint>
         
     <transmission name="${prefix}_transmission">
