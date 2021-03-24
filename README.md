@@ -35,9 +35,9 @@ The robot type is a four omnidirectional wheel with platfrom to carry pallets.
 
 - Create a xacro:macro
 
-- Navigation next update
+- Add a platform in the xacro
 
-![image info](./pictures/rostanke02.png)
+![image info](./pictures/rostanke03.jpg)
 
 ## Update ##
 
