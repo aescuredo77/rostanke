@@ -1,19 +1,19 @@
 base:
-  mass: 0.05
-  x_size: 0.14194
+  mass: 2.0
+  x_size: 0.014194
   y_size: 0.20505
-  z_size: 0.06724
+  z_size: 0.006724
   mesh: 'base_tanke.stl'
   x_offset: -0.74575  # -1.495
   y_offset: -0.185125  #-0.37
   z_offset: -0.03425 
   x_joint:  0.0
-  y_joint:  0.0
+  y_joint:  0.05
   z_joint:  0.03
 
 
 chassis:
-  mass: 0.04
+  mass: 0.5
   x_size: 0.14394
   y_size: 0.20946
   z_size: 0.05783
@@ -26,7 +26,7 @@ chassis:
   z_joint:  0.0 
 
 electronics:
-  mass: 0.02
+  mass: 0.5
   x_size: 0.046
   y_size: 0.17943
   z_size: 0.03168
@@ -39,7 +39,7 @@ electronics:
   z_joint:  0.0 
 
 motor_1:
-  mass: 0.04
+  mass: 0.2
   x_size: 0.0366
   y_size: 0.010
   z_size: 0.012
@@ -52,7 +52,7 @@ motor_1:
   z_joint:  0.0 
 
 motor_2:
-  mass: 0.04
+  mass: 0.2
   x_size: 0.0366
   y_size: 0.010
   z_size: 0.012
@@ -65,7 +65,7 @@ motor_2:
   z_joint:  0.0
 
 motor_3:
-  mass: 0.04
+  mass: 0.2
   x_size: 0.0366
   y_size: 0.010
   z_size: 0.012
@@ -78,7 +78,7 @@ motor_3:
   z_joint:  0.0 
 
 motor_4:
-  mass: 0.04
+  mass: 0.2
   x_size: 0.0366
   y_size: 0.010
   z_size: 0.012
@@ -98,57 +98,57 @@ wheel:
 
 
 wheel_fl:
-  x_offset: 0.01
+  x_offset: -0.01
   y_offset: 0.0 
   z_offset: 0.0
-  x_joint:  0.0
+  x_joint:  0.015
   y_joint:  0.0 
   z_joint:  0.0
 
 wheel_fr:
-  x_offset: -0.01
+  x_offset: 0.01
   y_offset: 0.0 
   z_offset: 0.0
-  x_joint:  0.0
+  x_joint:  -0.015
   y_joint:  0.0 
   z_joint:  0.0 
 
 wheel_bl:
-  x_offset: 0.01
+  x_offset: -0.01
   y_offset: 0.0 
   z_offset: 0.0
-  x_joint:  0.0
+  x_joint:  0.015
   y_joint:  0.0 
   z_joint:  0.0 
 
 wheel_br:
-  x_offset: -0.01
+  x_offset: 0.01
   y_offset: 0.0 
   z_offset: 0.0
-  x_joint:  0.0
+  x_joint:  -0.015
   y_joint:  0.0 
   z_joint:  0.0  
 
 plat00:
-  mass: 0.1
-  x_size: 0.07660
-  y_size: 0.11282
-  z_size: 0.02654
+  mass: 0.5
+  x_size: 0.07568
+  y_size: 0.10251
+  z_size: 0.03380
   mesh: 'plataforma/plat00.stl'
-  x_offset: -0.78875 #-1.5345
+  x_offset: -0.7435 #-0.78875 #-1.5345
   y_offset: -0.105 #-0.29
   z_offset: -0.0325 #-0.067
-  x_joint:  0.043
+  x_joint:  -0.00287 #0.043
   y_joint: -0.080125
   z_joint: -0.00125
 
 plat02:
-  mass: 0.1
-  x_size: 0.07660
-  y_size: 0.11282
-  z_size: 0.02654
+  mass: 0.5
+  x_size: 0.06888
+  y_size: 0.050
+  z_size: 0.03103
   mesh: 'plataforma/plat02.stl'
-  x_offset: -0.78875 #-1.5725
+  x_offset: -0.7435 #-0.78875 #-1.5725
   y_offset: -0.201 #-0.3025
   z_offset: -0.0525 #-0.09
   x_joint: 0.0
