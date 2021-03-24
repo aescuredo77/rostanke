@@ -1,0 +1,158 @@
+base:
+  mass: 0.05
+  x_size: 0.14194
+  y_size: 0.20505
+  z_size: 0.06724
+  mesh: 'base_tanke.stl'
+  x_offset: -0.74575  # -1.495
+  y_offset: -0.185125  #-0.37
+  z_offset: -0.03425 
+  x_joint:  0.0
+  y_joint:  0.0
+  z_joint:  0.03
+
+
+chassis:
+  mass: 0.04
+  x_size: 0.14394
+  y_size: 0.20946
+  z_size: 0.05783
+  mesh: 'chasis_tanke.stl'
+  x_offset: -0.74575  # -1.495
+  y_offset: -0.185125  #-0.37
+  z_offset: -0.03425  
+  x_joint:  0.0 
+  y_joint:  0.0 
+  z_joint:  0.0 
+
+electronics:
+  mass: 0.02
+  x_size: 0.046
+  y_size: 0.17943
+  z_size: 0.03168
+  mesh: 'electronica_tanke.stl'
+  x_offset: -0.74575  # -1.495
+  y_offset: -0.185125  #-0.37
+  z_offset: -0.03425 
+  x_joint:  0.0 
+  y_joint:  0.0 
+  z_joint:  0.0 
+
+motor_1:
+  mass: 0.04
+  x_size: 0.0366
+  y_size: 0.010
+  z_size: 0.012
+  mesh: 'm1.stl'
+  x_offset: -0.8125 
+  y_offset: -0.12775  
+  z_offset: -0.03425 
+  x_joint:  0.06675 
+  y_joint:  -0.057375 
+  z_joint:  0.0 
+
+motor_2:
+  mass: 0.04
+  x_size: 0.0366
+  y_size: 0.010
+  z_size: 0.012
+  mesh: 'm2.stl'
+  x_offset: -0.8125  
+  y_offset:  -0.2425  
+  z_offset: -0.03425
+  x_joint:  0.06675
+  y_joint:  0.057375
+  z_joint:  0.0
+
+motor_3:
+  mass: 0.04
+  x_size: 0.0366
+  y_size: 0.010
+  z_size: 0.012
+  mesh: 'm3.stl'
+  x_offset: -0.679 
+  y_offset: -0.12775 
+  z_offset: -0.03425 
+  x_joint:  -0.06675
+  y_joint:  -0.057375
+  z_joint:  0.0 
+
+motor_4:
+  mass: 0.04
+  x_size: 0.0366
+  y_size: 0.010
+  z_size: 0.012
+  mesh: 'm4.stl'
+  x_offset:  -0.679  
+  y_offset:  -0.2425  
+  z_offset: -0.03425
+  x_joint:  -0.06675
+  y_joint:  0.057375
+  z_joint:  0.0
+
+wheel:
+  mass: 1.0
+  radius: 0.03
+  leng: 0.015
+  material: 'Black'
+
+
+wheel_fl:
+  x_offset: 0.01
+  y_offset: 0.0 
+  z_offset: 0.0
+  x_joint:  0.0
+  y_joint:  0.0 
+  z_joint:  0.0
+
+wheel_fr:
+  x_offset: -0.01
+  y_offset: 0.0 
+  z_offset: 0.0
+  x_joint:  0.0
+  y_joint:  0.0 
+  z_joint:  0.0 
+
+wheel_bl:
+  x_offset: 0.01
+  y_offset: 0.0 
+  z_offset: 0.0
+  x_joint:  0.0
+  y_joint:  0.0 
+  z_joint:  0.0 
+
+wheel_br:
+  x_offset: -0.01
+  y_offset: 0.0 
+  z_offset: 0.0
+  x_joint:  0.0
+  y_joint:  0.0 
+  z_joint:  0.0  
+
+plat00:
+  mass: 0.1
+  x_size: 0.07660
+  y_size: 0.11282
+  z_size: 0.02654
+  mesh: 'plataforma/plat00.stl'
+  x_offset: -0.78875 #-1.5345
+  y_offset: -0.105 #-0.29
+  z_offset: -0.0325 #-0.067
+  x_joint:  0.043
+  y_joint: -0.080125
+  z_joint: -0.00125
+
+plat02:
+  mass: 0.1
+  x_size: 0.07660
+  y_size: 0.11282
+  z_size: 0.02654
+  mesh: 'plataforma/plat02.stl'
+  x_offset: -0.78875 #-1.5725
+  y_offset: -0.201 #-0.3025
+  z_offset: -0.0525 #-0.09
+  x_joint: 0.0
+  y_joint: 0.095
+  z_joint: 0.0205
+
+

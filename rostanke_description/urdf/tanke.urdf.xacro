@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rostanke">
+
+    <xacro:include filename="$(find rostanke_description)/urdf/gazebo.xacro" />
+    <xacro:include filename="$(find rostanke_description)/urdf/tanke.common.urdf.xacro"/>
+    <!--xacro:include filename="$(find rostanke_description)/urdf/wheel_base.xacro" /-->
+    <!--xacro:include filename="$(find rostanke_description)/urdf/platform_redux.xacro"/-->
+
+
+    <xacro:base 
+    origin_xyz = "${tanke_props['base']['x_offset']} ${tanke_props['base']['y_offset']} ${tanke_props['base']['z_offset']}"
+    origin_rpy= "0.0 0.0 0.0"
+    joint_xyz = "${tanke_props['base']['x_joint']} ${tanke_props['base']['y_joint']} ${tanke_props['base']['z_joint']}"
+    m="${tanke_props['base']['mass']}"
+    x="${tanke_props['base']['x_size']}"
+    y="${tanke_props['base']['y_size']}"
+    z="${tanke_props['base']['z_size']}"
+    mesh="${tanke_props['base']['mesh']}"
+    material="White"/>
+
+    <xacro:fixed prefix= "electronics" 
+    origin_xyz= "${tanke_props['electronics']['x_offset']} ${tanke_props['electronics']['y_offset']} ${tanke_props['electronics']['z_offset']}"
+    origin_rpy= "0.0 0.0 0.0"
+    joint_xyz = "${tanke_props['electronics']['x_joint']} ${tanke_props['electronics']['y_joint']} ${tanke_props['electronics']['z_joint']}" 
+    m= "${tanke_props['electronics']['mass']}"
+    x= "${tanke_props['electronics']['x_size']}"  
+    y= "${tanke_props['electronics']['y_size']}"   
+    z= "${tanke_props['electronics']['z_size']}"
+    mesh= "${tanke_props['electronics']['mesh']}"
+    material="Green"/>
+
+
+    <xacro:fixed prefix= "chassis" 
+    origin_xyz= "${tanke_props['chassis']['x_offset']} ${tanke_props['chassis']['y_offset']} ${tanke_props['chassis']['z_offset']}"
+    origin_rpy= "0.0 0.0 0.0"
+    joint_xyz = "${tanke_props['chassis']['x_joint']} ${tanke_props['chassis']['y_joint']} ${tanke_props['chassis']['z_joint']}" 
+    m= "${tanke_props['chassis']['mass']}"
+    x= "${tanke_props['chassis']['x_size']}"  
+    y= "${tanke_props['chassis']['y_size']}"   
+    z= "${tanke_props['chassis']['z_size']}"
+    mesh= "${tanke_props['chassis']['mesh']}"
+    material="Grey"/>
+    
+
+    <xacro:fixed prefix= "motor_FL" 
+    origin_xyz= "${tanke_props['motor_1']['x_offset']} ${tanke_props['motor_1']['y_offset']} ${tanke_props['motor_1']['z_offset']}"
+    origin_rpy= "0.0 0.0 0.0"
+    joint_xyz = "${tanke_props['motor_1']['x_joint']} ${tanke_props['motor_1']['y_joint']} ${tanke_props['motor_1']['z_joint']}" 
+    m= "${tanke_props['motor_1']['mass']}"
+    x= "${tanke_props['motor_1']['x_size']}"  
+    y= "${tanke_props['motor_1']['y_size']}"   
+    z= "${tanke_props['motor_1']['z_size']}"
+    mesh= "${tanke_props['motor_1']['mesh']}"
+    material="DarkGrey"/>
+    
+    <xacro:fixed prefix= "motor_BL" 
+    origin_xyz= "${tanke_props['motor_2']['x_offset']} ${tanke_props['motor_2']['y_offset']} ${tanke_props['motor_2']['z_offset']}"
+    origin_rpy= "0.0 0.0 0.0"
+    joint_xyz = "${tanke_props['motor_2']['x_joint']} ${tanke_props['motor_2']['y_joint']} ${tanke_props['motor_2']['z_joint']}" 
+    m= "${tanke_props['motor_2']['mass']}"
+    x= "${tanke_props['motor_2']['x_size']}"  
+    y= "${tanke_props['motor_2']['y_size']}"   
+    z= "${tanke_props['motor_2']['z_size']}"
+    mesh= "${tanke_props['motor_2']['mesh']}"
+    material="DarkGrey"/>
+
+    <xacro:fixed prefix= "motor_FR" 
+    origin_xyz= "${tanke_props['motor_3']['x_offset']} ${tanke_props['motor_3']['y_offset']} ${tanke_props['motor_3']['z_offset']}"
+    origin_rpy= "0.0 0.0 0.0"
+    joint_xyz = "${tanke_props['motor_3']['x_joint']} ${tanke_props['motor_3']['y_joint']} ${tanke_props['motor_3']['z_joint']}" 
+    m= "${tanke_props['motor_3']['mass']}"
+    x= "${tanke_props['motor_3']['x_size']}"  
+    y= "${tanke_props['motor_3']['y_size']}"   
+    z= "${tanke_props['motor_3']['z_size']}"
+    mesh= "${tanke_props['motor_3']['mesh']}"
+    material="DarkGrey"/>
+
+    <xacro:fixed prefix= "motor_BR" 
+    origin_xyz= "${tanke_props['motor_4']['x_offset']} ${tanke_props['motor_4']['y_offset']} ${tanke_props['motor_4']['z_offset']}"
+    origin_rpy= "0.0 0.0 0.0"
+    joint_xyz = "${tanke_props['motor_4']['x_joint']} ${tanke_props['motor_4']['y_joint']} ${tanke_props['motor_4']['z_joint']}" 
+    m= "${tanke_props['motor_4']['mass']}"
+    x= "${tanke_props['motor_4']['x_size']}"  
+    y= "${tanke_props['motor_4']['y_size']}"   
+    z= "${tanke_props['motor_4']['z_size']}"
+    mesh= "${tanke_props['motor_4']['mesh']}"
+    material="DarkGrey"/>
+
+      
+    <xacro:wheel_x prefix="front_left"
+    parent_link= "motor_FL_link"
+    origin_xyz="${tanke_props['wheel_fl']['x_offset']} ${tanke_props['wheel_fl']['y_offset']} ${tanke_props['wheel_fl']['z_offset']}"
+    origin_rpy= "0.0 ${PI/2} 0.0"
+    joint_xyz = "${tanke_props['wheel_fl']['x_joint']} ${tanke_props['wheel_fl']['y_joint']} ${tanke_props['wheel_fl']['z_joint']}"
+    joint_rpy = "0.0 0.0 0.0"
+    wheel_props= "${tanke_props}"/>
+           
+    <xacro:wheel_x prefix="back_left"
+    parent_link= "motor_BL_link"
+    origin_xyz="${tanke_props['wheel_bl']['x_offset']} ${tanke_props['wheel_bl']['y_offset']} ${tanke_props['wheel_bl']['z_offset']}"
+    origin_rpy= "0.0 ${PI/2} 0.0"
+    joint_xyz = "${tanke_props['wheel_bl']['x_joint']} ${tanke_props['wheel_bl']['y_joint']} ${tanke_props['wheel_bl']['z_joint']}"
+    joint_rpy ="0.0 0.0 0.0"
+    wheel_props= "${tanke_props}"/>
+    
+    <xacro:wheel_x prefix="front_right"
+    parent_link= "motor_FR_link"
+    origin_xyz="${tanke_props['wheel_fr']['x_offset']} ${tanke_props['wheel_fr']['y_offset']} ${tanke_props['wheel_fr']['z_offset']}"
+    origin_rpy= "0.0 ${PI/2} 0.0"
+    joint_xyz = "${tanke_props['wheel_fr']['x_joint']} ${tanke_props['wheel_fr']['y_joint']} ${tanke_props['wheel_fr']['z_joint']}"
+    joint_rpy ="0.0 0.0 0.0"
+    wheel_props= "${tanke_props}"/>
+    
+    <xacro:wheel_x prefix="back_right"
+    parent_link= "motor_BR_link"
+    origin_xyz="${tanke_props['wheel_br']['x_offset']} ${tanke_props['wheel_br']['y_offset']} ${tanke_props['wheel_br']['z_offset']}"
+    origin_rpy= "0.0 ${PI/2} 0.0"
+    joint_xyz = "${tanke_props['wheel_br']['x_joint']} ${tanke_props['wheel_br']['y_joint']} ${tanke_props['wheel_br']['z_joint']}"
+    joint_rpy ="0.0 0.0 0.0"
+    wheel_props= "${tanke_props}"/>
+
+    <xacro:plat prefix="plat00" 
+    parent_link="base_link" 
+    origin_xyz="${tanke_props['plat00']['x_offset']} ${tanke_props['plat00']['y_offset']} ${tanke_props['plat00']['z_offset']}"
+    origin_rpy="0.0 0.0 0.0" 
+    joint_xyz="${tanke_props['plat00']['x_joint']} ${tanke_props['plat00']['y_joint']} ${tanke_props['plat00']['z_joint']}"
+    joint_rpy="0.0 0.0 0.0" 
+    plat_props="${tanke_props['plat00']}" 
+    material="Blue"
+    lower="0.0" 
+    uper="0.32"/>
+
+    <xacro:plat prefix="plat02" 
+    parent_link="plat00_link" 
+    origin_xyz="${tanke_props['plat02']['x_offset']} ${tanke_props['plat02']['y_offset']} ${tanke_props['plat02']['z_offset']}"
+    origin_rpy="0.0 0.0 0.0" 
+    joint_xyz="${tanke_props['plat02']['x_joint']} ${tanke_props['plat02']['y_joint']} ${tanke_props['plat02']['z_joint']}"
+    joint_rpy="0.0 0.0 0.0" 
+    plat_props="${tanke_props['plat02']}" 
+    material="Blue"
+    lower="-0.32" 
+    uper="0.0"/>
+
+    <xacro:gpu_laser prefix="rplidar" 
+    parent_link="base_link"
+    sensor_prop="${sensor_prop}"
+    material= "Grey"
+    material2= "Red"/> 
+    
+   
+</robot>

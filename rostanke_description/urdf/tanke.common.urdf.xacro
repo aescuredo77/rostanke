@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+   
+    <xacro:include filename="$(find rostanke_description)/urdf/materials.xacro" />
+     <xacro:include filename="$(find rostanke_description)/urdf/gazebo.xacro" />
+        
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <!--  wheels configuration-->
+        
+
+    <xacro:property name="tanke_yaml" value="$(find rostanke_description)/config/tanke.yaml"/>
+    <xacro:property name="tanke_props" value="${load_yaml(tanke_yaml)}"/>    
+    
+    <xacro:property name="platform_redux_yaml" value="$(find rostanke_description)/config/plataforma_redux.yaml"/>
+    <xacro:property name="platform_redux_props" value="${load_yaml(platform_redux_yaml)}"/> 
+    
+    <xacro:property name="sensor_yaml" value="$(find rostanke_description)/config/sensors.yaml" />
+    <xacro:property name="sensor_prop" value="${load_yaml(sensor_yaml)}"/>
+
+    <xacro:macro name="inertia_box" params="m x y z o_xyz o_rpy">
+        <inertial>
+            <mass value="${m}"/>
+            <inertia ixx="${m / 12.0 * (y*y + z*z)}" ixy="0.0" ixz="0.0"
+               iyy="${m / 12.0 * (x*x + z*z)}" iyz="0.0" 
+               izz="${m / 12.0 * (x*x + y*y)}"/>
+            <origin xyz="${o_xyz}" rpy="${o_rpy}" />
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_inertia" params="m r l o_xyz o_rpy">
+        <inertial>
+        <mass value="${m}"/>
+        <inertia ixx="${m*(3*r*r+l*l)/12}" ixy = "0" ixz = "0" 
+                iyy="${m*(3*r*r+l*l)/12}" iyz = "0" izz="${m*r*r/2}"/>
+            <origin xyz="${o_xyz}" rpy="${o_rpy}" />
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="aux" params=" prefix joint_xyz material">
+         <link name="${prefix}_aux_link1">
+            <visual>
+                <geometry>
+                    <cylinder radius="0.015" length="0.001"/>
+                </geometry>
+                <material name="${material}"/>
+                <origin xyz="${joint_xyz}" rpy="0.0 ${PI/2} 0.0"/>
+            </visual>
+        </link>
+        <link name="${prefix}_aux_link2">
+            <visual>
+                <geometry>
+                    <cylinder radius="0.001" length="0.6"/>
+                </geometry>
+                <material name="${material}"/>
+                <origin xyz="${joint_xyz}" rpy="0.0 ${PI/2} 0.0"/>
+            </visual>
+        </link>
+    </xacro:macro>
+
+
+
+    
+    <!--         ##############      macro base robot footpring     ############           -->
+
+
+    <xacro:macro name="base" params="origin_xyz origin_rpy joint_xyz m x y z mesh material">
+        
+        <!--xacro:aux  prefix="${prefix}_aux" joint_xyz="${joint_xyz}"  material="White"/-->
+          
+        <link name="base_footprint"/>
+        
+        <joint name="base_footprint_joint" type="fixed">
+            <parent link="base_footprint"/>
+            <child link="base_link" />
+            <origin xyz="${joint_xyz}" rpy="0.0 0.0 0.0" />
+        </joint>
+        <link name="base_link">
+            <xacro:inertia_box m="${m}" x="${x}" y="${y}"  z="${z}" o_xyz="0.0 0.0 0.0" o_rpy="0.0 0.0 0.0"/> 
+            <visual>
+                <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+                <geometry>
+                    <mesh filename="package://rostanke_description/meshes/${mesh}" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="${material}"/>
+            </visual>
+            <collision>
+                <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+                <geometry>
+                    <mesh filename="package://rostanke_description/meshes/${mesh}" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="base_link">
+            <material>Gazebo/${material}</material>
+        </gazebo>
+    </xacro:macro>
+
+     <xacro:macro name="fixed" params="prefix origin_xyz origin_rpy joint_xyz m x y z mesh material ">
+                
+        <!--xacro:aux  prefix="${prefix}_aux" joint_xyz="${joint_xyz}"  material="White"/-->
+        
+        <link name="${prefix}_link">
+            <xacro:inertia_box m="${m}" x="${x}" y="${y}"  z="${z}" o_xyz="0.0 0.0 0.0" o_rpy="0.0 0.0 0.0"/> 
+            <visual>
+                <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+                <geometry>
+                    <mesh filename="package://rostanke_description/meshes/${mesh}" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="${material}"/>
+            </visual>
+            <collision>
+                <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+                <geometry>
+                    <mesh filename="package://rostanke_description/meshes/${mesh}" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+        <joint name="${prefix}_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="${prefix}_link"/>
+            <origin xyz="${joint_xyz}" rpy="${origin_rpy}" />
+            <axis xyz="1 0 0" rpy="0 0 0" />
+        </joint>
+        <gazebo reference="${prefix}_link">
+            <material>Gazebo/${material}</material>
+            
+        </gazebo>
+    </xacro:macro>
+
+    
+
+    <xacro:macro name="wheel_x" params="prefix parent_link origin_xyz origin_rpy joint_xyz joint_rpy 
+     wheel_props ">
+
+        <link name="${prefix}_base_wheel_link">
+
+            <xacro:cylinder_inertia m="${wheel_props['wheel']['mass']}"
+                r="${wheel_props['wheel']['radius']}"
+                l="${wheel_props['wheel']['leng']}"
+                o_xyz="0.0 0.0 0.0"  o_rpy="0.0 ${PI/2} 0.0"/>            
+            <visual >
+                <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+                <geometry>
+                    <cylinder radius="${wheel_props['wheel']['radius']}" length="${wheel_props['wheel']['leng']}"/>
+                </geometry>
+                <material name="${wheel_props['wheel']['material']}"/>
+            </visual>
+            <collision>
+                <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+                <geometry>
+                    <cylinder radius="${wheel_props['wheel']['radius']}" length="${wheel_props['wheel']['leng']}"/>
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="${prefix}_base_wheel_link">
+            <material>Gazebo/${wheel_props['wheel']['material']}</material>
+            <mu1> 0.02</mu1>
+            <mu2>0.01</mu2>
+            <!--kp>10000000.0</kp>
+            <kd >100.0</kd>
+            <minDepth>0.001</minDepth>
+            <maxVel>50.0</maxVel>
+            <fdir1>0 1 0</fdir1-->
+        </gazebo>
+
+        <joint name="${prefix}_base_wheel_joint" type="continuous">
+            <origin xyz="${joint_xyz}" rpy="${joint_rpy}"/>
+            <parent link="${parent_link}"/>
+            <child link="${prefix}_base_wheel_link"/>
+            <!--imit effort="100" velocity="100"/>
+            <joint_properties damping="0.0" friction="0.0"/-->
+            <axis xyz="1.0 0.0 0.0"/>
+        </joint>  
+
+        <transmission name="${prefix}_wheel_transmission">
+                <type>transmission_interface/SimpleTransmission</type>
+                <joint name="${prefix}_base_wheel_joint">
+                    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                </joint>
+                <actuator name="${prefix}_motor_link">
+                    <mechanicalReduction>1</mechanicalReduction>
+                    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                </actuator>
+        </transmission>
+    </xacro:macro>
+
+
+    <xacro:macro name="plat" params="prefix parent_link origin_xyz origin_rpy joint_xyz joint_rpy plat_props material lower uper">
+
+        <!--xacro:aux  prefix="${prefix}_aux" joint_xyz="${joint_xyz}"  material="White"/-->
+        
+        <link name="${prefix}_link">
+        <xacro:inertia_box m="${plat_props['mass']}"
+            x="${plat_props['x_size']}"
+            y="${plat_props['y_size']}"
+            z="${plat_props['z_size']}"
+            o_xyz= "0.0 0.0 0.0"  o_rpy="0.0 0.0 0.0"/>
+        <visual >
+            <origin xyz="${plat_props['x_offset']} ${plat_props['y_offset']} ${plat_props['z_offset']}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+               <mesh filename="package://rostanke_description/meshes/${plat_props['mesh']}" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="${material}"/>
+        </visual>
+        <collision>
+            <origin xyz="${plat_props['x_offset']} ${plat_props['y_offset']} ${plat_props['z_offset']}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://rostanke_description/meshes/${plat_props['mesh']}" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <gazebo reference="plat00_link">
+        <material>Gazebo/${material}</material>
+    </gazebo>
+
+    <joint name="${prefix}_joint" type="revolute">
+        <parent link="${parent_link}"/>
+        <child link="${prefix}_link"/>
+        <axis xyz="1 0 0"/>
+        <origin xyz="${plat_props['x_joint']} ${plat_props['y_joint']} ${plat_props['z_joint']}" rpy="0 0 0"/>
+        <limit lower="${lower}" upper="${uper}" effort="1.0" velocity="0.06"/>
+    </joint>
+        
+    <transmission name="${prefix}_transmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="${prefix}_joint">
+             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="${prefix}_motor_link">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+        
+    </xacro:macro>
+
+
+    <xacro:macro name="gpu_laser" params="prefix parent_link sensor_prop material material2"> 
+
+  <xacro:property name="mesh"
+     value="${sensor_prop['gpu_laser']['mesh']}"/>
+
+  <link name="${prefix}_gpu_laser_link">
+      <xacro:if value="${mesh != '' }" >
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://rostanke_description/meshes/sensors/${mesh}" />
+        </geometry>
+        <material name="${material}"/>
+      </visual>
+    </xacro:if>
+    <xacro:if value="${mesh == '' }" >
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+         <geometry>
+         <cylinder radius="${sensor_prop['gpu_laser']['radius']}" length="${sensor_prop['gpu_laser']['length']}"/>
+        </geometry>
+        <material name="${material2}"/>
+      </visual>
+    </xacro:if>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="${sensor_prop['gpu_laser']['radius']}" length="${sensor_prop['gpu_laser']['length']}"/>
+        </geometry>
+      </collision>
+      <xacro:cylinder_inertia m="${sensor_prop['gpu_laser']['mass']}"
+                              r="${sensor_prop['gpu_laser']['radius']}"
+                              l="${sensor_prop['gpu_laser']['length']}"
+                              o_xyz="0 0 0"
+                              o_rpy="0 0 0" >
+      </xacro:cylinder_inertia> 
+  </link>
+  <gazebo reference="${prefix}_gpu_laser_link">
+    <material>Gazebo/${material}</material>
+  </gazebo>
+
+  <joint name="${prefix}_gpu_laser_joint" type="fixed">
+    <parent link="${parent_link}"/>
+    <child link="${prefix}_gpu_laser_link"/>
+    <origin xyz="${sensor_prop['gpu_laser']['dx']} ${sensor_prop['gpu_laser']['dy']} ${sensor_prop['gpu_laser']['dz']}" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <!-- hokuyo gazebo references -->
+  <gazebo reference="${prefix}_gpu_laser_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>${sensor_prop['gpu_laser']['angular_range']['min']}</min_angle>
+            <max_angle>${sensor_prop['gpu_laser']['angular_range']['max']}</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.12</min>
+          <max>3.5</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!--Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. --> 
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/rostanke/scan</topicName>
+        <frameName>${prefix}_gpu_laser_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</xacro:macro>
+
+
+</robot>

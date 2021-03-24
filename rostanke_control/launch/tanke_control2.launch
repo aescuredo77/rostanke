@@ -1,0 +1,33 @@
+<launch>
+
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+     <!--rosparam command="load"  
+            file="$(find rostanke_control)/config/pid.yaml" /-->
+
+    <rosparam command="load"
+            file="$(find rostanke_control)/config/tanke_control.yaml" />
+   
+
+    <!-- load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="/rostanke" args="joint_state_controller
+                                             joint1_position_controller
+                                             joint2_position_controller  
+                                             tanke_base_controller"/>
+
+    <!-- load robot_state_publisher and remap joint-state-publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher"
+        ns="rostanke" respawn="false" output="screen">
+        <remap from="/joint_states" to="/rostanke/joint_states" />
+      
+    </node>
+
+
+  <!-- load rqt steering node -->
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+    <param name="default_topic" value="/rostanke/tanke_base_controller/cmd_vel"/>
+  </node>
+  
+
+
+</launch>

@@ -1,0 +1,129 @@
+coordinates:
+  origin_xyz: -0.679 -0.2425 -0.03425
+  joint_xyz: 0.679 0.2425 0.03425
+  
+
+base:
+  mass: 1.0
+  radius: 0.03
+  leng: 0.024
+  x_size: 0.024
+  y_size: 0.03304
+  z_size: 0.03448
+  #mesh: 'wheelbr/base_wheel.stl'
+  x_offset: 0.0
+  y_offset: 0.0
+  z_offset: 0.0
+  x_joint: 0.0
+  y_joint: 0.0
+  z_joint: 0.0
+  material: 'Black'
+
+
+base_wheel:
+  mass: 0.5
+  radius: 0.0165
+  leng: 0.024
+  x_size: 0.024
+  y_size: 0.03304
+  z_size: 0.03448
+  mesh: 'wheelbr/base_wheel.stl'
+  x_offset: -0.679
+  y_offset: -0.2425
+  z_offset: -0.03425
+  x_joint: 0.0
+  y_joint: 0.0
+  z_joint: 0.0
+  material: 'Black'
+
+chasis_wheel_1:
+  mass: 0.01
+  radius: 0.06216
+  leng: 0.00695
+  mesh: 'wheelbr/chasis_wheel1.stl'
+  material: 'Red'
+
+chasis_wheel_2:
+  mass: 0.01
+  radius: 0.06216
+  leng: 0.00695
+  mesh: 'wheelbr/chasis_wheel2.stl'
+  material: 'Red'
+
+e_wheel_01:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel1.stl'
+  material: 'DarkGrey'
+
+e_wheel_02:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel2.stl'
+  material: 'DarkGrey'
+
+
+e_wheel_03:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel3.stl'
+  material: 'DarkGrey'
+
+
+e_wheel_04:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel4.stl'
+  material: 'DarkGrey'
+
+e_wheel_05:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel5.stl'
+  material: 'DarkGrey'
+
+
+e_wheel_06:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel6.stl'
+  material: 'DarkGrey'
+
+e_wheel_07:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel7.stl'
+  material: 'DarkGrey'
+
+e_wheel_08:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel8.stl'
+  material: 'DarkGrey'
+
+
+e_wheel_09:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel9.stl'
+  material: 'DarkGrey'
+
+
+e_wheel_10:
+  mass: 0.001
+  radius: 0.0055
+  leng: 0.019
+  mesh: 'wheelbr/wheel10.stl'
+  material: 'DarkGrey'
+
+
+

@@ -1,0 +1,12 @@
+rostanke:
+  gazebo_ros_control:
+    pid_gains:
+      front_left_base_wheel_joint:
+        {p: 100.0, i: 0.01, d: 1.0}
+      back_left_base_wheel_joint:
+        {p: 100.0, i: 0.01, d: 1.0}
+      front_right_base_wheel_joint:
+        {p: 100.0, i: 0.01, d: 1.0}
+      back_right_base_wheel_joint:
+        {p: 100.0, i: 0.01, d: 1.0}
+      
