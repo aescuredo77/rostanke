@@ -156,13 +156,12 @@
         </link>
         <gazebo reference="${prefix}_base_wheel_link">
             <material>Gazebo/${wheel_props['wheel']['material']}</material>
-            <mu1> 0.02</mu1>
-            <mu2>0.01</mu2>
-            <!--kp>10000000.0</kp>
-            <kd >100.0</kd>
-            <minDepth>0.001</minDepth>
-            <maxVel>50.0</maxVel>
-            <fdir1>0 1 0</fdir1-->
+            <mu1> 200.0</mu1>
+            <mu2>200.0</mu2>
+            <kp>10000000.0</kp>
+            <kd >1.0</kd>
+            <minDepth>0.08</minDepth>
+            
         </gazebo>
 
         <joint name="${prefix}_base_wheel_joint" type="continuous">
