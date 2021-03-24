@@ -5,8 +5,8 @@ gpu_laser:
   mesh: 'rplidar-a2.stl'  # Name of the mesh files. Leave it empty ('') to have a red wheel
   #mesh: ''
   dx: 0.0
-  dy: -0.09
-  dz: 0.08
+  dy: 0.0
+  dz: 0.065
   angular_range:
     min: -3.1415
     max: 3.1415
