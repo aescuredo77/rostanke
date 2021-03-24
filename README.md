@@ -78,6 +78,8 @@ Then build the workspace with `catkin_make`.
 
 I am basing the code of this project on a colleague's [project](https://github.com/mukmalone/hello_robot). But I can't get the robot to move in the simulator. The platfrom is working.
 
+![image info](./pictures/rostanke04.jpg)
+
 
 ## Next Step ##
 
